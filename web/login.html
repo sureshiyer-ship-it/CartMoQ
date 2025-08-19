@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CartMoQ • Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="auth-card" aria-labelledby="login-heading">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">🛒</div>
+          <h1 id="login-heading" class="brand-title">Sign in to CartMoQ</h1>
+          <p class="brand-subtitle">Manage your cart, orders, and profile</p>
+        </div>
+
+        <form id="login-form" class="form" novalidate>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" inputmode="email" autocomplete="username" placeholder="you@example.com" required />
+            <p class="error" id="email-error" role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <div class="label-row">
+              <label for="password">Password</label>
+              <button class="link" id="toggle-password" type="button" aria-controls="password" aria-pressed="false">Show</button>
+            </div>
+            <input id="password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" minlength="8" required />
+            <p class="error" id="password-error" role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="row">
+            <label class="checkbox">
+              <input id="remember" name="remember" type="checkbox" />
+              <span>Remember me</span>
+            </label>
+            <a class="link" href="#" aria-label="Forgot password">Forgot?</a>
+          </div>
+
+          <button type="submit" class="button primary" id="submit-btn">
+            <span class="spinner" aria-hidden="true"></span>
+            <span>Sign in</span>
+          </button>
+
+          <div class="divider" role="separator" aria-label="Continue with">
+            <span>or</span>
+          </div>
+
+          <button type="button" class="button outline icon" id="google-btn">
+            <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
+              <path fill="#FFC107" d="M43.611 20.083H42v-.083H24v8h11.303C33.731 32.662 29.287 36 24 36c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.153 7.961 3.039l5.657-5.657C34.869 6.053 29.706 4 24 4 12.954 4 4 12.954 4 24s8.954 20 20 20 20-8.954 20-20c0-1.341-.138-2.651-.389-3.917z"/>
+              <path fill="#FF3D00" d="M6.306 14.691l6.571 4.818C14.371 16.108 18.833 12 24 12c3.059 0 5.842 1.153 7.961 3.039l5.657-5.657C34.869 6.053 29.706 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
+              <path fill="#4CAF50" d="M24 44c5.217 0 9.979-1.997 13.569-5.245l-6.261-5.29C29.287 36 24.843 32.662 24 32.662c-5.246 0-9.698-3.313-11.408-7.917l-6.57 5.061C9.317 39.52 16.017 44 24 44z"/>
+              <path fill="#1976D2" d="M43.611 20.083H42v-.083H24v8h11.303a12.03 12.03 0 0 1-4.699 5.382l.001-.001 6.261 5.29C35.861 39.188 42 34 42 24c0-1.341-.138-2.651-.389-3.917z"/>
+            </svg>
+            <span>Continue with Google</span>
+          </button>
+
+          <p class="meta">Don't have an account? <a class="link" href="#">Create one</a></p>
+        </form>
+      </section>
+      <aside class="promo" aria-label="Promotional">
+        <div class="promo-inner">
+          <h2>Exclusive deals await</h2>
+          <p>Join CartMoQ to unlock personalized discounts, faster checkout, and order tracking.</p>
+          <ul>
+            <li>Free returns for 30 days</li>
+            <li>Member-only flash sales</li>
+            <li>Secure checkout</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+
+    <script src="./app.js" defer></script>
+  </body>
+  </html>
+

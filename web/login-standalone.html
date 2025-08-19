@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CartMoQ • Login (Standalone)</title>
+    <style>
+L1: :root { --bg:#0b1020; --card:#0f152a; --muted:#7b85a1; --text:#e6e9f5; --primary:#6ea8fe; --primary-600:#5998fd; --ring:rgba(110,168,254,0.4); --danger:#ff6b6b }
+L2: *{box-sizing:border-box} html,body{height:100%} body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";color:var(--text);background:radial-gradient(1200px 800px at 10% -10%,#192042,transparent 40%),radial-gradient(1200px 800px at 110% 10%,#1a244a,transparent 40%),var(--bg)} .page{display:grid;grid-template-columns:1fr 1fr;gap:32px;min-height:100vh;padding:32px}
+L3: .auth-card{align-self:center;max-width:440px;width:100%;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px;box-shadow:0 10px 30px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.06);backdrop-filter:blur(10px)} .brand{text-align:center;margin-bottom:18px} .logo{font-size:28px} .brand-title{margin:8px 0 4px;font-size:22px} .brand-subtitle{margin:0;color:var(--muted);font-size:14px}
+L4: .form{display:grid;gap:14px} .field{display:grid;gap:6px} .label-row{display:flex;align-items:center;justify-content:space-between} label{font-weight:600;font-size:13px;color:#b9c1da}
+L5: input[type=email],input[type=password]{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(10,14,28,.65);color:var(--text);outline:none;transition:border-color .2s ease,box-shadow .2s ease,background .2s ease} input::placeholder{color:#8f97b3} input:focus{border-color:var(--primary);box-shadow:0 0 0 4px var(--ring);background:rgba(10,14,28,.8)}
+L6: .row{display:flex;align-items:center;justify-content:space-between} .checkbox{display:inline-flex;align-items:center;gap:8px;color:#c5cbe0;font-size:13px} .checkbox input{accent-color:var(--primary)}
+L7: .button{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.03);color:var(--text);font-weight:600;cursor:pointer;transition:transform .06s ease,background .2s ease,border-color .2s ease} .button:active{transform:translateY(1px)} .button.primary{background:linear-gradient(180deg,var(--primary),var(--primary-600));border-color:transparent;color:#0b1020} .button.primary:hover{filter:brightness(.98)} .button.outline{background:transparent} .button.icon svg{display:inline-block}
+L8: .link{background:none;border:none;color:var(--primary);cursor:pointer;text-decoration:none;font-weight:600;font-size:13px;padding:0} .link:hover{text-decoration:underline} .error{min-height:18px;margin:0;color:var(--danger);font-size:12px}
+L9: .divider{position:relative;text-align:center;color:#aab3cf;font-size:12px;margin:8px 0} .divider span{background:var(--card);padding:0 8px;position:relative;z-index:1;border-radius:999px} .divider:before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(255,255,255,.1)} .spinner{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.5);border-top-color:transparent;display:none;animation:spin .8s linear infinite} .button.loading .spinner{display:inline-block} .button.loading span:last-child{opacity:.8} @keyframes spin{to{transform:rotate(360deg)}} .promo{display:none}
+L10: @media (min-width:960px){.promo{display:block;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800"><defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="%23192042"/><stop offset="1" stop-color="%231a244a"/></linearGradient></defs><rect width="800" height="800" fill="url(%23g)"/><g fill="none" stroke="%235e6aa8" opacity="0.2"><circle cx="600" cy="200" r="160"/><circle cx="640" cy="240" r="120"/><circle cx="560" cy="220" r="200"/></g></svg>') center/cover no-repeat;border-radius:16px;border:1px solid rgba(255,255,255,.08)} .promo-inner{padding:48px;max-width:520px} .promo h2{margin:0 0 12px;font-size:28px} .promo p{margin:0 0 12px;color:#c1c8e0} .promo ul{margin:0;padding-left:18px;color:#c1c8e0}}
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="auth-card" aria-labelledby="login-heading">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">🛒</div>
+          <h1 id="login-heading" class="brand-title">Sign in to CartMoQ</h1>
+          <p class="brand-subtitle">Manage your cart, orders, and profile</p>
+        </div>
+
+        <form id="login-form" class="form" novalidate>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" inputmode="email" autocomplete="username" placeholder="you@example.com" required />
+            <p class="error" id="email-error" role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <div class="label-row">
+              <label for="password">Password</label>
+              <button class="link" id="toggle-password" type="button" aria-controls="password" aria-pressed="false">Show</button>
+            </div>
+            <input id="password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" minlength="8" required />
+            <p class="error" id="password-error" role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="row">
+            <label class="checkbox">
+              <input id="remember" name="remember" type="checkbox" />
+              <span>Remember me</span>
+            </label>
+            <a class="link" href="#" aria-label="Forgot password">Forgot?</a>
+          </div>
+
+          <button type="submit" class="button primary" id="submit-btn">
+            <span class="spinner" aria-hidden="true"></span>
+            <span>Sign in</span>
+          </button>
+
+          <div class="divider" role="separator" aria-label="Continue with">
+            <span>or</span>
+          </div>
+
+          <button type="button" class="button outline icon" id="google-btn">
+            <span>Continue with Google</span>
+          </button>
+
+          <p class="meta">Don't have an account? <a class="link" href="#">Create one</a></p>
+        </form>
+      </section>
+      <aside class="promo" aria-label="Promotional">
+        <div class="promo-inner">
+          <h2>Exclusive deals await</h2>
+          <p>Join CartMoQ to unlock personalized discounts, faster checkout, and order tracking.</p>
+          <ul>
+            <li>Free returns for 30 days</li>
+            <li>Member-only flash sales</li>
+            <li>Secure checkout</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+
+    <script>
+      (() => {
+        const form = document.getElementById('login-form');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const emailError = document.getElementById('email-error');
+        const passwordError = document.getElementById('password-error');
+        const submitBtn = document.getElementById('submit-btn');
+        const togglePasswordBtn = document.getElementById('toggle-password');
+        const googleBtn = document.getElementById('google-btn');
+
+        function setButtonLoading(isLoading) {
+          submitBtn.classList.toggle('loading', isLoading);
+          submitBtn.disabled = isLoading;
+        }
+
+        function validateEmail(value) {
+          if (!value) return 'Email is required';
+          const valid = /.+@.+\..+/.test(value);
+          return valid ? '' : 'Enter a valid email address';
+        }
+
+        function validatePassword(value) {
+          if (!value) return 'Password is required';
+          if (value.length < 8) return 'Must be at least 8 characters';
+          return '';
+        }
+
+        function showError(el, message) { el.textContent = message; }
+        function clearErrors() { showError(emailError, ''); showError(passwordError, ''); }
+
+        togglePasswordBtn.addEventListener('click', () => {
+          const isPassword = passwordInput.type === 'password';
+          passwordInput.type = isPassword ? 'text' : 'password';
+          togglePasswordBtn.setAttribute('aria-pressed', String(isPassword));
+          togglePasswordBtn.textContent = isPassword ? 'Hide' : 'Show';
+        });
+
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          clearErrors();
+          const email = emailInput.value.trim();
+          const password = passwordInput.value;
+          const emailMsg = validateEmail(email);
+          const passwordMsg = validatePassword(password);
+          if (emailMsg || passwordMsg) {
+            if (emailMsg) showError(emailError, emailMsg);
+            if (passwordMsg) showError(passwordError, passwordMsg);
+            return;
+          }
+          try {
+            setButtonLoading(true);
+            await new Promise((r) => setTimeout(r, 900));
+            localStorage.setItem('cartmoq_auth', JSON.stringify({ email, token: 'demo-token', ts: Date.now() }));
+            alert('Signed in as ' + email);
+          } catch (err) {
+            showError(passwordError, err?.message || 'Login failed');
+          } finally { setButtonLoading(false); }
+        });
+
+        googleBtn.addEventListener('click', async () => {
+          setButtonLoading(true);
+          await new Promise((r) => setTimeout(r, 600));
+          alert('Google OAuth is not configured in this demo.');
+          setButtonLoading(false);
+        });
+      })();
+    </script>
+  </body>
+  </html>
+
